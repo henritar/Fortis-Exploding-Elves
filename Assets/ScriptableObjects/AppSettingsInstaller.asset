@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d11402b189ffa1b4a96961fd0d9b20b3, type: 3}
+  m_Name: AppSettingsInstaller
+  m_EditorClassIdentifier: 
+  ElvesSettings:
+  - ElfPrefab: {fileID: 2622138823800758538, guid: fb1cf6f374fef1f43846d271393c6bf7, type: 3}
+    ElfName: BlackElf
+    StartLocation: {x: -15, y: 15}
+    SpawnRate: 1
+  - ElfPrefab: {fileID: 2622138823800758538, guid: 9f755729eee785f40888459ae641964a, type: 3}
+    ElfName: BlueElf
+    StartLocation: {x: 15, y: 15}
+    SpawnRate: 5
+  - ElfPrefab: {fileID: 2622138823800758538, guid: 87d5c11504875004d8adfdec626b0bad, type: 3}
+    ElfName: RedElf
+    StartLocation: {x: -15, y: -15}
+    SpawnRate: 10
+  - ElfPrefab: {fileID: 2622138823800758538, guid: a0f8e0878a4e8d7459f6e4ee61a7e3ee, type: 3}
+    ElfName: WhiteElf
+    StartLocation: {x: 15, y: -15}
+    SpawnRate: 15
+  FloorSettings:
+    FloorCenter: 0
+    FloorExtends: 22
