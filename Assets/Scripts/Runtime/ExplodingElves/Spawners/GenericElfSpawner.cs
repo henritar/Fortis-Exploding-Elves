@@ -22,7 +22,7 @@ namespace Assets.Scripts.Runtime.ExplodingElves.Spawners
         protected List<ElfView> _elfPool = new List<ElfView>();
         protected List<int> CollisionHashList = new List<int>();
         protected IDisposable coroutine;
-        protected int SpawnRate = 1;
+        protected float SpawnRate = 1;
         public GenericElvesSpawner(SignalBus signalBus, MainSceneInstaller.ElfSettings elvesSettings)
         {
             _signalBus = signalBus;
@@ -41,7 +41,7 @@ namespace Assets.Scripts.Runtime.ExplodingElves.Spawners
         }
 
        
-        protected IEnumerator SpawnElvesCoroutine(int spawnRate)
+        protected IEnumerator SpawnElvesCoroutine(float spawnRate)
         {
             while (true)
             {
@@ -127,7 +127,6 @@ namespace Assets.Scripts.Runtime.ExplodingElves.Spawners
                     elf.Dispose();
                 }
             }
-            Debug.Log(_elfPool.Count);
             coroutine = Observable.FromCoroutine(() => SpawnElvesCoroutine(SpawnRate)).Subscribe();
         }
 

@@ -41,35 +41,27 @@ namespace Assets.Scripts.Runtime.ExplodingElves.Misc
     public interface IUpdateElfSpawnRate
     {
         public string ElfName { get; set; }
-        public int SpawnRate { get; set; }
+        public float SpawnRate { get; set; }
     }
 
     public struct UpdateBlackElfSignal : IUpdateElfSpawnRate
     {
         public string ElfName { get; set; }
-        public int SpawnRate { get; set; }
+        public float SpawnRate { get; set; }
     }
     public struct UpdateBlueElfSignal : IUpdateElfSpawnRate
     {
         public string ElfName { get; set; }
-        public int SpawnRate { get; set; }
+        public float SpawnRate { get; set; }
     }
     public struct UpdateRedElfSignal : IUpdateElfSpawnRate
     {
         public string ElfName { get; set; }
-        public int SpawnRate { get; set; }
+        public float SpawnRate { get; set; }
     }
     public struct UpdateWhiteElfSignal : IUpdateElfSpawnRate
     {
         public string ElfName { get; set; }
-        public int SpawnRate { get; set; }
-    }
-
-    public struct UpdateElfSpawnRateUISignal
-    {
-        public string BlackElfSpawnRateText { get; set; }
-        public string BlueElfSpawnRateText { get; set; }
-        public string RedElfSpawnRateText { get; set; }
-        public string WhiteElfSpawnRateText { get; set; }
+        public float SpawnRate { get; set; }
     }
 }
