@@ -20,13 +20,13 @@ namespace Assets.Scripts.Runtime.ExplodingElves.Installers
             Container.BindInterfacesAndSelfTo<BlueElvesSpawner>().AsSingle().WithArguments(_elvesSettings[1]);
             Container.BindInterfacesAndSelfTo<RedElvesSpawner>().AsSingle().WithArguments(_elvesSettings[2]);
             Container.BindInterfacesAndSelfTo<WhiteElvesSpawner>().AsSingle().WithArguments(_elvesSettings[3]);
-            Container.BindFactory<BlackElfView, BlackElfView.Factory>().FromMonoPoolableMemoryPool(x => x.WithInitialSize(5).ExpandByDoubling()
+            Container.BindFactory<BlackElfView, BlackElfView.Factory>().FromMonoPoolableMemoryPool(pool => pool.WithInitialSize(10).ExpandByDoubling()
                 .FromSubContainerResolve().ByNewPrefabInstaller<BlackElfInstaller>(_elvesSettings[0].ElfPrefab).UnderTransformGroup("BlackElfPool"));
-            Container.BindFactory<BlueElfView, BlueElfView.Factory>().FromMonoPoolableMemoryPool(x => x.WithInitialSize(5).ExpandByDoubling()
+            Container.BindFactory<BlueElfView, BlueElfView.Factory>().FromMonoPoolableMemoryPool(pool => pool.WithInitialSize(10).ExpandByDoubling()
                 .FromSubContainerResolve().ByNewPrefabInstaller<BlueElfInstaller>(_elvesSettings[1].ElfPrefab).UnderTransformGroup("BlueElfPool"));
-            Container.BindFactory<RedElfView, RedElfView.Factory>().FromMonoPoolableMemoryPool(x => x.WithInitialSize(5).ExpandByDoubling()
+            Container.BindFactory<RedElfView, RedElfView.Factory>().FromMonoPoolableMemoryPool(pool => pool.WithInitialSize(10).ExpandByDoubling()
                 .FromSubContainerResolve().ByNewPrefabInstaller<RedElfInstaller>(_elvesSettings[2].ElfPrefab).UnderTransformGroup("RedElfPool"));
-            Container.BindFactory<WhiteElfView, WhiteElfView.Factory>().FromMonoPoolableMemoryPool(x => x.WithInitialSize(5).ExpandByDoubling()
+            Container.BindFactory<WhiteElfView, WhiteElfView.Factory>().FromMonoPoolableMemoryPool(pool => pool.WithInitialSize(10).ExpandByDoubling()
                 .FromSubContainerResolve().ByNewPrefabInstaller<WhiteElfInstaller>(_elvesSettings[3].ElfPrefab).UnderTransformGroup("WhiteElfPool"));
 
             Container.Bind<string>().FromInstance(_elvesSettings[0].ElfName)

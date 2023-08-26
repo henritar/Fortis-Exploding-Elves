@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.AI;
 using Zenject;
@@ -19,12 +20,17 @@ namespace Assets.Scripts.Runtime.ExplodingElves.Elves
 
         public NavMeshAgent NavAgent;
 
-        public ElfModel(string elfName, Vector2Int initialPosition, NavMeshAgent navMeshAgent)
+        public Rigidbody ViewRigidbody;
+        public Collider ViewCollider;
+
+        public ElfModel(string elfName, Vector2Int initialPosition, NavMeshAgent navMeshAgent, Rigidbody viewRigidbody, Collider viewCollider)
         {
             ElfName = elfName;
             XPosition = initialPosition.x;
             ZPosition = initialPosition.y;
             NavAgent = navMeshAgent;
+            ViewRigidbody = viewRigidbody;
+            ViewCollider = viewCollider;
         }
     }
 }

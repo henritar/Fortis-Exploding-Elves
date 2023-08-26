@@ -1,4 +1,5 @@
 using Assets.Scripts.Runtime.ExplodingElves.Elves;
+using UnityEngine;
 using UnityEngine.AI;
 using Zenject;
 
@@ -14,6 +15,8 @@ namespace Assets.Scripts.Runtime.ExplodingElves.Installers
             Container.Bind<BlueElfModel>().AsSingle().WhenInjectedInto<BlueElfController>();
             Container.Bind<BlueElfView>().FromComponentOnRoot().AsSingle();
             Container.Bind<NavMeshAgent>().FromComponentOnRoot().AsSingle();
+            Container.Bind<Rigidbody>().FromComponentOnRoot().AsSingle();
+            Container.Bind<Collider>().FromComponentOnRoot().AsSingle();
             Container.BindInstance(_floorSettings.FloorCenter).WithId("floorCenter").WhenInjectedInto<BlueElfModel>().IfNotBound();
             Container.BindInstance(_floorSettings.FloorExtends).WithId("floorExtends").WhenInjectedInto<BlueElfModel>().IfNotBound();
 

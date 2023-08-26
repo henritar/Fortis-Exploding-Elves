@@ -6,8 +6,8 @@ namespace Assets.Scripts.Runtime.ExplodingElves.Elves
     public class WhiteElfModel : ElfModel
     {
 
-        public WhiteElfModel(string elfName, Vector2Int initialPosition, NavMeshAgent navMeshAgent)
-            : base (elfName, initialPosition, navMeshAgent)
+        public WhiteElfModel(string elfName, Vector2Int initialPosition, NavMeshAgent navMeshAgent, Rigidbody viewRigidbody, Collider viewCollider)
+            : base (elfName, initialPosition, navMeshAgent, viewRigidbody, viewCollider)
         {
         }
     }

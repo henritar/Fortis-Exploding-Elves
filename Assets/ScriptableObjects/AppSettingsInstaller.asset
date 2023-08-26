@@ -16,19 +16,19 @@ MonoBehaviour:
   - ElfPrefab: {fileID: 2622138823800758538, guid: fb1cf6f374fef1f43846d271393c6bf7, type: 3}
     ElfName: BlackElf
     StartLocation: {x: -15, y: 15}
-    SpawnRate: 1
+    SpawnRate: 2
   - ElfPrefab: {fileID: 2622138823800758538, guid: 9f755729eee785f40888459ae641964a, type: 3}
     ElfName: BlueElf
     StartLocation: {x: 15, y: 15}
-    SpawnRate: 5
+    SpawnRate: 2
   - ElfPrefab: {fileID: 2622138823800758538, guid: 87d5c11504875004d8adfdec626b0bad, type: 3}
     ElfName: RedElf
     StartLocation: {x: -15, y: -15}
-    SpawnRate: 10
+    SpawnRate: 2
   - ElfPrefab: {fileID: 2622138823800758538, guid: a0f8e0878a4e8d7459f6e4ee61a7e3ee, type: 3}
     ElfName: WhiteElf
     StartLocation: {x: 15, y: -15}
-    SpawnRate: 15
+    SpawnRate: 2
   FloorSettings:
     FloorCenter: 0
     FloorExtends: 22

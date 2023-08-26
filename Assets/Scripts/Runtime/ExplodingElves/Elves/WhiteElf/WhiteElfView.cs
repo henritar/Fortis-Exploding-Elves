@@ -6,7 +6,6 @@ namespace Assets.Scripts.Runtime.ExplodingElves.Elves
     {
         public class Factory : PlaceholderFactory<WhiteElfView> 
         {
-            
         }
     }
 }

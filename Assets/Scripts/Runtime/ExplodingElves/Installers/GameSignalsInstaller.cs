@@ -10,6 +10,9 @@ namespace Assets.Scripts.Runtime.ExplodingElves.Installers
             SignalBusInstaller.Install(Container);
 
             Container.DeclareSignalWithInterfaces<UpdateElfInstall>().OptionalSubscriber();
+            Container.DeclareSignalWithInterfaces<DestructiveCollisionSignal>().OptionalSubscriber();
+            Container.DeclareSignalWithInterfaces<GenerativeCollisionEnterSignal>().OptionalSubscriber();
+            Container.DeclareSignalWithInterfaces<GenerativeCollisionExitSignal>().OptionalSubscriber();
         }
     }
 }
