@@ -22,6 +22,7 @@ namespace Assets.Scripts.Runtime.ExplodingElves.Spawners
         protected List<ElfView> _elfPool = new List<ElfView>();
         protected List<int> CollisionHashList = new List<int>();
         protected IDisposable coroutine;
+        protected int SpawnRate = 1;
         public GenericElvesSpawner(SignalBus signalBus, MainSceneInstaller.ElfSettings elvesSettings)
         {
             _signalBus = signalBus;
@@ -34,15 +35,17 @@ namespace Assets.Scripts.Runtime.ExplodingElves.Spawners
             _signalBus.Subscribe<DestructiveCollisionSignal>(RemoveElf);
             _signalBus.Subscribe<GenerativeCollisionEnterSignal>(SpawnCloneElf);
             _signalBus.Subscribe<GenerativeCollisionExitSignal>(RemoveHashCollision);
-            coroutine = Observable.FromCoroutine(() => SpawnElvesCoroutine(_elvesSettings)).Subscribe();
+            _signalBus.Subscribe<IUpdateElfSpawnRate>(UpdateElfSpawnRate);
+            coroutine = Observable.FromCoroutine(() => SpawnElvesCoroutine(SpawnRate)).Subscribe();
         }
 
-        protected IEnumerator SpawnElvesCoroutine(MainSceneInstaller.ElfSettings elfSettings)
+       
+        protected IEnumerator SpawnElvesCoroutine(int spawnRate)
         {
             while (true)
             {
+                yield return new WaitForSeconds(spawnRate);
                 SpawnElf();
-                yield return new WaitForSeconds(elfSettings.SpawnRate);
             }
         }
 
@@ -95,5 +98,18 @@ namespace Assets.Scripts.Runtime.ExplodingElves.Spawners
             CollisionHashList.Remove(signal.CollisionHash);
             mut.ReleaseMutex();
         }
+
+        private void UpdateElfSpawnRate(IUpdateElfSpawnRate signal)
+        {
+            if (SpawnRate == signal.SpawnRate)
+                return;
+            if (_elvesSettings.ElfName == signal.ElfName)
+            {
+                SpawnRate = signal.SpawnRate;
+                coroutine.Dispose();
+                coroutine = Observable.FromCoroutine(() => SpawnElvesCoroutine(SpawnRate)).Subscribe();
+            }
+        }
+
     }
 }

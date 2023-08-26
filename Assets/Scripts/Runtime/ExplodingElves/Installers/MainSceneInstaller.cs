@@ -16,10 +16,7 @@ namespace Assets.Scripts.Runtime.ExplodingElves.Installers
         int elvesIndex;
         public override void InstallBindings()
         {
-            Container.BindInterfacesAndSelfTo<BlackElvesSpawner>().AsSingle().WithArguments(_elvesSettings[0]);
-            Container.BindInterfacesAndSelfTo<BlueElvesSpawner>().AsSingle().WithArguments(_elvesSettings[1]);
-            Container.BindInterfacesAndSelfTo<RedElvesSpawner>().AsSingle().WithArguments(_elvesSettings[2]);
-            Container.BindInterfacesAndSelfTo<WhiteElvesSpawner>().AsSingle().WithArguments(_elvesSettings[3]);
+            
             Container.BindFactory<BlackElfView, BlackElfView.Factory>().FromMonoPoolableMemoryPool(pool => pool.WithInitialSize(10).ExpandByDoubling()
                 .FromSubContainerResolve().ByNewPrefabInstaller<BlackElfInstaller>(_elvesSettings[0].ElfPrefab).UnderTransformGroup("BlackElfPool"));
             Container.BindFactory<BlueElfView, BlueElfView.Factory>().FromMonoPoolableMemoryPool(pool => pool.WithInitialSize(10).ExpandByDoubling()

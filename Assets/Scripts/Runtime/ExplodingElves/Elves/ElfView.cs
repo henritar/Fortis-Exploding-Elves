@@ -10,7 +10,6 @@ namespace Assets.Scripts.Runtime.ExplodingElves.Elves
 
         public void Dispose()
         {
-            Debug.Log("Dispose" + gameObject.name + " index: " + gameObject.transform.GetSiblingIndex());
             _pool.Despawn(this);
         }
 
