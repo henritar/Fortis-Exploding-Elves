@@ -20,6 +20,7 @@ namespace Assets.Scripts.Runtime.ExplodingElves.Installers
             Container.DeclareSignalWithInterfaces<UpdateElfSpawnRateUISignal>().OptionalSubscriber();
             Container.DeclareSignalWithInterfaces<ReturnToMainUISignal>().OptionalSubscriber();
             Container.DeclareSignalWithInterfaces<AdjustSpawnRateSignal>().OptionalSubscriber();
+            Container.DeclareSignalWithInterfaces<RestartGameSignal>().OptionalSubscriber();
         }
     }
 }

@@ -7,5 +7,8 @@ namespace Assets.Scripts.Runtime.ExplodingElves.UI
     {
         [Inject(Id = "settingsButton")]
         public Button SettingsButton;
+
+        [Inject(Id = "restartButton")]
+        public Button RestartButton;
     }
 }

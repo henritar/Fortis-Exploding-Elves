@@ -125,8 +125,10 @@ namespace Assets.Scripts.Runtime.ExplodingElves.UI.Spawners
             });
 
             _signalBus.Subscribe<UpdateElfSpawnRateUISignal>(UpdateUISpawnRate);
-
+            
         }
+
+        
 
         private void UpdateUISpawnRate(UpdateElfSpawnRateUISignal signal)
         {

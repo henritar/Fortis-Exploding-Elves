@@ -36,6 +36,7 @@ namespace Assets.Scripts.Runtime.ExplodingElves.Spawners
             _signalBus.Subscribe<GenerativeCollisionEnterSignal>(SpawnCloneElf);
             _signalBus.Subscribe<GenerativeCollisionExitSignal>(RemoveHashCollision);
             _signalBus.Subscribe<IUpdateElfSpawnRate>(UpdateElfSpawnRate);
+            _signalBus.Subscribe<RestartGameSignal>(RestartElvesPool);
             coroutine = Observable.FromCoroutine(() => SpawnElvesCoroutine(SpawnRate)).Subscribe();
         }
 
@@ -67,8 +68,11 @@ namespace Assets.Scripts.Runtime.ExplodingElves.Spawners
             {
                 
                 mut.WaitOne();
-                _elfPool.Remove(elfView);
-                elfView.Dispose();
+                while (_elfPool.Contains(elfView))
+                {
+                    _elfPool.Remove(elfView);
+                    elfView.Dispose();
+                }
                 mut.ReleaseMutex();
                 
             }
@@ -109,6 +113,22 @@ namespace Assets.Scripts.Runtime.ExplodingElves.Spawners
                 coroutine.Dispose();
                 coroutine = Observable.FromCoroutine(() => SpawnElvesCoroutine(SpawnRate)).Subscribe();
             }
+        }
+
+        private void RestartElvesPool(RestartGameSignal signal)
+        {
+            coroutine.Dispose();
+            while (_elfPool.Count > 0)
+            {
+                for (int i = 0; i < _elfPool.Count; i++)
+                {
+                    var elf = _elfPool[i];
+                    _elfPool.Remove(elf);
+                    elf.Dispose();
+                }
+            }
+            Debug.Log(_elfPool.Count);
+            coroutine = Observable.FromCoroutine(() => SpawnElvesCoroutine(SpawnRate)).Subscribe();
         }
 
     }

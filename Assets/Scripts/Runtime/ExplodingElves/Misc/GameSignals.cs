@@ -34,6 +34,10 @@ namespace Assets.Scripts.Runtime.ExplodingElves.Misc
     {
     }
 
+    public struct RestartGameSignal
+    {
+    }
+
     public interface IUpdateElfSpawnRate
     {
         public string ElfName { get; set; }

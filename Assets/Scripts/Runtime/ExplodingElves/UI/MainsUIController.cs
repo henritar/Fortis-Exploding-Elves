@@ -26,6 +26,11 @@ namespace Assets.Scripts.Runtime.ExplodingElves.UI
                 _signalBus.Fire(new AdjustSpawnRateSignal());
                 _model.SettingsButton.enabled = false;
             });
+
+            _model.RestartButton.onClick.AddListener(() =>
+            {
+                _signalBus.Fire(new RestartGameSignal());
+            });
         }
 
         private void ResetMainUI(ReturnToMainUISignal signal)

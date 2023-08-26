@@ -6,6 +6,7 @@ using Zenject;
 public class UIMainInstaller : MonoInstaller
 {
     [SerializeField] public Button SettingsButton;
+    [SerializeField] public Button RestartButton;
 
     public override void InstallBindings()
     {
@@ -14,5 +15,6 @@ public class UIMainInstaller : MonoInstaller
         Container.BindInterfacesAndSelfTo<MainUIView>().FromComponentInHierarchy().AsSingle().WhenInjectedInto<MainsUIController>();
 
         Container.BindInstance(SettingsButton).WithId("settingsButton").WhenInjectedInto<MainUIModel>();
+        Container.BindInstance(RestartButton).WithId("restartButton").WhenInjectedInto<MainUIModel>();
     }
 }
