@@ -1,5 +1,4 @@
 using Assets.Scripts.Runtime.ExplodingElves.Elves;
-using Assets.Scripts.Runtime.ExplodingElves.Spawners.Portals;
 using System;
 using UnityEngine;
 using Zenject;
@@ -16,17 +15,14 @@ namespace Assets.Scripts.Runtime.ExplodingElves.Installers
         int elvesIndex;
         public override void InstallBindings()
         {
-            
-            Container.BindFactory<BlackElfView, BlackElfView.Factory>().FromMonoPoolableMemoryPool(pool => pool.WithInitialSize(10).ExpandByDoubling()
+            Container.BindFactory<BlackElfView, BlackElfView.Factory>().FromPoolableMemoryPool<BlackElfView, BlackElfView.BlackElfPool>(pool => pool.WithInitialSize(10).ExpandByDoubling()
                 .FromSubContainerResolve().ByNewPrefabInstaller<BlackElfInstaller>(_elvesSettings[0].ElfPrefab).UnderTransformGroup("BlackElfPool"));
-            Container.BindFactory<BlueElfView, BlueElfView.Factory>().FromMonoPoolableMemoryPool(pool => pool.WithInitialSize(10).ExpandByDoubling()
+            Container.BindFactory<BlueElfView, BlueElfView.Factory>().FromPoolableMemoryPool<BlueElfView, BlueElfView.BlueElfPool>(pool => pool.WithInitialSize(10).ExpandByDoubling()
                 .FromSubContainerResolve().ByNewPrefabInstaller<BlueElfInstaller>(_elvesSettings[1].ElfPrefab).UnderTransformGroup("BlueElfPool"));
-            Container.BindFactory<RedElfView, RedElfView.Factory>().FromMonoPoolableMemoryPool(pool => pool.WithInitialSize(10).ExpandByDoubling()
+            Container.BindFactory<RedElfView, RedElfView.Factory>().FromPoolableMemoryPool<RedElfView, RedElfView.RedElfPool>(pool => pool.WithInitialSize(10).ExpandByDoubling()
                 .FromSubContainerResolve().ByNewPrefabInstaller<RedElfInstaller>(_elvesSettings[2].ElfPrefab).UnderTransformGroup("RedElfPool"));
-            Container.BindFactory<WhiteElfView, WhiteElfView.Factory>().FromMonoPoolableMemoryPool(pool => pool.WithInitialSize(10).ExpandByDoubling()
+            Container.BindFactory<WhiteElfView, WhiteElfView.Factory>().FromPoolableMemoryPool<WhiteElfView, WhiteElfView.WhiteElfPool>(pool => pool.WithInitialSize(10).ExpandByDoubling()
                 .FromSubContainerResolve().ByNewPrefabInstaller<WhiteElfInstaller>(_elvesSettings[3].ElfPrefab).UnderTransformGroup("WhiteElfPool"));
-
-           
 
             Container.Bind<string>().FromInstance(_elvesSettings[0].ElfName)
                     .WhenInjectedInto<BlackElfModel>();
@@ -45,21 +41,7 @@ namespace Assets.Scripts.Runtime.ExplodingElves.Installers
                     .WhenInjectedInto<RedElfModel>();
             Container.Bind<Vector2Int>().FromInstance(_elvesSettings[3].StartLocation)
                     .WhenInjectedInto<WhiteElfModel>();
-
         }
-
-        //private UnityEngine.Object SelectElfPrefab(InjectContext context)
-        //{
-        //    ElfSettings settings = _elvesSettings[elvesIndex % _elvesSettings.Length];
-
-        //    Container.Rebind<string>().FromInstance(settings.ElfName)
-        //            .WhenInjectedInto<ElfModel>();
-
-        //    Container.Rebind<Vector2Int>().FromInstance(settings.StartTile)
-        //            .WhenInjectedInto<ElfModel>();
-
-        //    return _elvesSettings[elvesIndex++ % _elvesSettings.Length].ElfPrefab;
-        //}
 
         [Serializable]
         public class ElfSettings

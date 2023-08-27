@@ -5,7 +5,9 @@ using Zenject;
 
 public class UIMainInstaller : MonoInstaller
 {
-    [SerializeField] public Button SettingsButton;
+    [SerializeField] public Canvas MainUICanvas;
+    [SerializeField] public Button SpawnRateSettingsButton;
+    [SerializeField] public Button SpawnCountSettingsButton;
     [SerializeField] public Button RestartButton;
 
     public override void InstallBindings()
@@ -14,7 +16,9 @@ public class UIMainInstaller : MonoInstaller
         Container.Bind<MainUIModel>().AsSingle().WhenInjectedInto<MainsUIController>();
         Container.BindInterfacesAndSelfTo<MainUIView>().FromComponentInHierarchy().AsSingle().WhenInjectedInto<MainsUIController>();
 
-        Container.BindInstance(SettingsButton).WithId("settingsButton").WhenInjectedInto<MainUIModel>();
+        Container.BindInstance(MainUICanvas).WithId("mainUICanvas").WhenInjectedInto<MainUIModel>();
+        Container.BindInstance(SpawnRateSettingsButton).WithId("spawnRateSettingsButton").WhenInjectedInto<MainUIModel>();
+        Container.BindInstance(SpawnCountSettingsButton).WithId("spawnCountSettingsButton").WhenInjectedInto<MainUIModel>();
         Container.BindInstance(RestartButton).WithId("restartButton").WhenInjectedInto<MainUIModel>();
     }
 }

@@ -10,6 +10,10 @@ namespace Assets.Scripts.Runtime.ExplodingElves.Elves
 
         public void Dispose()
         {
+            if (_pool.NumActive < 5)
+            {
+                _pool.Resize(10);
+            }
             _pool.Despawn(this);
         }
 
@@ -22,7 +26,7 @@ namespace Assets.Scripts.Runtime.ExplodingElves.Elves
         {
             _pool = pool;
         }
-        
+
     }
 
 }

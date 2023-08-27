@@ -84,7 +84,7 @@ namespace Assets.Scripts.Runtime.ExplodingElves.Elves
 
         protected IEnumerator ActivateCollision()
         {
-            yield return new WaitForSeconds(1.5f);
+            yield return new WaitForSeconds(0.8f);
             _model.ViewRigidbody.detectCollisions = true;
         }
     }

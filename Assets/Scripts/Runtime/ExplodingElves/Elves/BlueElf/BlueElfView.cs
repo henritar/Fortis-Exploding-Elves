@@ -7,5 +7,8 @@ namespace Assets.Scripts.Runtime.ExplodingElves.Elves
         public class Factory : PlaceholderFactory<BlueElfView> 
         {
         }
+        public class BlueElfPool : MonoPoolableMemoryPool<IMemoryPool, BlueElfView>
+        {
+        }
     }
 }

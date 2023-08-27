@@ -1,5 +1,4 @@
 using Assets.Scripts.Runtime.ExplodingElves.Misc;
-using UnityEngine;
 using Zenject;
 
 namespace Assets.Scripts.Runtime.ExplodingElves.UI
@@ -21,10 +20,16 @@ namespace Assets.Scripts.Runtime.ExplodingElves.UI
         {
             _signalBus.Subscribe<ReturnToMainUISignal>(ResetMainUI);
 
-            _model.SettingsButton.onClick.AddListener(() =>
+            _model.SpawnRateSettingsButton.onClick.AddListener(() =>
             {
                 _signalBus.Fire(new AdjustSpawnRateSignal());
-                _model.SettingsButton.enabled = false;
+                _model.MainUICanvas.enabled = false;
+            });
+
+            _model.SpawnCountSettingsButton.onClick.AddListener(() =>
+            {
+                _signalBus.Fire(new AdjustSpawnCountSignal());
+                _model.MainUICanvas.enabled = false;
             });
 
             _model.RestartButton.onClick.AddListener(() =>
@@ -35,7 +40,7 @@ namespace Assets.Scripts.Runtime.ExplodingElves.UI
 
         private void ResetMainUI(ReturnToMainUISignal signal)
         {
-            _model.SettingsButton.enabled = true;
+            _model.MainUICanvas.enabled = true;
         }
     }
 }

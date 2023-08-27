@@ -3,9 +3,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
 
-namespace Assets.Scripts.Runtime.ExplodingElves.UI.Spawners
+namespace Assets.Scripts.Runtime.ExplodingElves.UI.Spawners.Rate
 {
-    public class SpawnerUIModel
+    public class SpawnerRateUIModel
     {
 
         [Inject(Id = "spawnerCanvas")]

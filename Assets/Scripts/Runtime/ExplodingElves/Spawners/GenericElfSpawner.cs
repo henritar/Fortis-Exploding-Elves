@@ -26,10 +26,12 @@ namespace Assets.Scripts.Runtime.ExplodingElves.Spawners
         protected List<int> CollisionHashList = new List<int>();
         protected IDisposable coroutine;
         protected float SpawnRate = 1;
+        protected int SpawnMaxCount;
         public GenericElvesSpawner(SignalBus signalBus, MainSceneInstaller.ElfSettings elvesSettings)
         {
             _signalBus = signalBus;
             _elvesSettings = elvesSettings;
+            SpawnMaxCount = elvesSettings.MaxSpawnQt;
         }
 
 
@@ -39,6 +41,7 @@ namespace Assets.Scripts.Runtime.ExplodingElves.Spawners
             _signalBus.Subscribe<GenerativeCollisionEnterSignal>(SpawnCloneElf);
             _signalBus.Subscribe<GenerativeCollisionExitSignal>(RemoveHashCollision);
             _signalBus.Subscribe<IUpdateElfSpawnRate>(UpdateElfSpawnRate);
+            _signalBus.Subscribe<IUpdateElfCountRate>(UpdateElfSpawnCount);
             _signalBus.Subscribe<RestartGameSignal>(RestartElvesPool);
             coroutine = Observable.FromCoroutine(() => SpawnElvesCoroutine(SpawnRate)).Subscribe();
 
@@ -58,7 +61,7 @@ namespace Assets.Scripts.Runtime.ExplodingElves.Spawners
 
         public ElfView SpawnElf()
         {
-            if (_elfPool.Count > _elvesSettings.MaxSpawnQt)
+            if (_elfPool.Count > SpawnMaxCount)
                 return null;
 
             var newElf = _elfFactory.Create();
@@ -122,6 +125,16 @@ namespace Assets.Scripts.Runtime.ExplodingElves.Spawners
                 SpawnRate = signal.SpawnRate;
                 coroutine.Dispose();
                 coroutine = Observable.FromCoroutine(() => SpawnElvesCoroutine(SpawnRate)).Subscribe();
+            }
+        }
+
+        private void UpdateElfSpawnCount(IUpdateElfCountRate signal)
+        {
+            if (SpawnMaxCount == signal.SpawnCount)
+                return;
+            if (_elvesSettings.ElfName == signal.ElfName)
+            {
+                SpawnMaxCount = signal.SpawnCount;
             }
         }
 

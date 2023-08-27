@@ -3,17 +3,17 @@ using System;
 using UnityEngine;
 using Zenject;
 
-namespace Assets.Scripts.Runtime.ExplodingElves.UI.Spawners
+namespace Assets.Scripts.Runtime.ExplodingElves.UI.Spawners.Rate
 {
-    public class SpawnerUIController : IInitializable, IDisposable
+    public class SpawnerRateUIController : IInitializable, IDisposable
     {
-        readonly SpawnerUIModel _model;
-        readonly SpawnerUIView _view;
+        readonly SpawnerRateUIModel _model;
+        readonly SpawnerRateUIView _view;
         readonly SignalBus _signalBus;
 
         float MinSpawnRate = 0.25f;
         float SpawnDefinedRate = 0.25f;
-        public SpawnerUIController(SpawnerUIModel model, SpawnerUIView view, SignalBus signalBus)
+        public SpawnerRateUIController(SpawnerRateUIModel model, SpawnerRateUIView view, SignalBus signalBus)
         {
             _model = model;
             _view = view;

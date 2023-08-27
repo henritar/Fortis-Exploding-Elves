@@ -34,6 +34,10 @@ namespace Assets.Scripts.Runtime.ExplodingElves.Misc
     {
     }
 
+    public struct AdjustSpawnCountSignal
+    {
+    }
+
     public struct RestartGameSignal
     {
     }
@@ -44,24 +48,34 @@ namespace Assets.Scripts.Runtime.ExplodingElves.Misc
         public float SpawnRate { get; set; }
     }
 
-    public struct UpdateBlackElfSignal : IUpdateElfSpawnRate
+    public interface IUpdateElfCountRate
     {
         public string ElfName { get; set; }
-        public float SpawnRate { get; set; }
+        public int SpawnCount { get; set; }
     }
-    public struct UpdateBlueElfSignal : IUpdateElfSpawnRate
+
+    public struct UpdateBlackElfSignal : IUpdateElfSpawnRate, IUpdateElfCountRate
     {
         public string ElfName { get; set; }
         public float SpawnRate { get; set; }
+        public int SpawnCount { get; set; }
     }
-    public struct UpdateRedElfSignal : IUpdateElfSpawnRate
+    public struct UpdateBlueElfSignal : IUpdateElfSpawnRate, IUpdateElfCountRate
     {
         public string ElfName { get; set; }
         public float SpawnRate { get; set; }
+        public int SpawnCount { get; set; }
     }
-    public struct UpdateWhiteElfSignal : IUpdateElfSpawnRate
+    public struct UpdateRedElfSignal : IUpdateElfSpawnRate, IUpdateElfCountRate
     {
         public string ElfName { get; set; }
         public float SpawnRate { get; set; }
+        public int SpawnCount { get; set; }
+    }
+    public struct UpdateWhiteElfSignal : IUpdateElfSpawnRate, IUpdateElfCountRate
+    {
+        public string ElfName { get; set; }
+        public float SpawnRate { get; set; }
+        public int SpawnCount { get; set; }
     }
 }

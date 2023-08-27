@@ -7,8 +7,6 @@ namespace Assets.Scripts.Runtime.ExplodingElves.Installers
     {
         public override void InstallBindings()
         {
-            SignalBusInstaller.Install(Container);
-
             Container.DeclareSignalWithInterfaces<UpdateElfInstallSignal>().OptionalSubscriber();
             Container.DeclareSignalWithInterfaces<DestructiveCollisionSignal>().OptionalSubscriber();
             Container.DeclareSignalWithInterfaces<GenerativeCollisionEnterSignal>().OptionalSubscriber();
@@ -19,6 +17,7 @@ namespace Assets.Scripts.Runtime.ExplodingElves.Installers
             Container.DeclareSignalWithInterfaces<UpdateWhiteElfSignal>().OptionalSubscriber();
             Container.DeclareSignalWithInterfaces<ReturnToMainUISignal>().OptionalSubscriber();
             Container.DeclareSignalWithInterfaces<AdjustSpawnRateSignal>().OptionalSubscriber();
+            Container.DeclareSignalWithInterfaces<AdjustSpawnCountSignal>().OptionalSubscriber();
             Container.DeclareSignalWithInterfaces<RestartGameSignal>().OptionalSubscriber();
         }
     }

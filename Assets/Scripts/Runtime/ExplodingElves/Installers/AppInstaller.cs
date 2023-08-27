@@ -6,6 +6,7 @@ namespace Assets.Scripts.Runtime.ExplodingElves.Installers
     {
         public override void InstallBindings()
         {
+            SignalBusInstaller.Install(Container);
             GameSignalsInstaller.Install(Container);
         }
 
