@@ -1,4 +1,5 @@
 using Assets.Scripts.Runtime.ExplodingElves.Elves;
+using Assets.Scripts.Runtime.ExplodingElves.Misc;
 using System;
 using UnityEngine;
 using Zenject;
@@ -10,11 +11,17 @@ namespace Assets.Scripts.Runtime.ExplodingElves.Installers
 
         [Inject(Id = "elves")]
         MainSceneInstaller.ElfSettings[] _elvesSettings;
+        [Inject(Id = "explosionSettings")]
+        MainSceneInstaller.ExplosionSettings explosionSettings;
         
 
         int elvesIndex;
         public override void InstallBindings()
         {
+            Container.Bind<AudioPlayer>().AsSingle();
+            Container.Bind<Camera>().FromComponentInHierarchy().AsSingle();
+            Container.BindInstance(explosionSettings).AsSingle();
+
             Container.BindFactory<BlackElfView, BlackElfView.Factory>().FromPoolableMemoryPool<BlackElfView, BlackElfView.BlackElfPool>(pool => pool.WithInitialSize(10).ExpandByDoubling()
                 .FromSubContainerResolve().ByNewPrefabInstaller<BlackElfInstaller>(_elvesSettings[0].ElfPrefab).UnderTransformGroup("BlackElfPool"));
             Container.BindFactory<BlueElfView, BlueElfView.Factory>().FromPoolableMemoryPool<BlueElfView, BlueElfView.BlueElfPool>(pool => pool.WithInitialSize(10).ExpandByDoubling()
@@ -51,6 +58,12 @@ namespace Assets.Scripts.Runtime.ExplodingElves.Installers
             public string ElfName;
             public Vector2Int StartLocation;
             public int MaxSpawnQt;
+        }
+        [Serializable]
+        public class ExplosionSettings
+        {
+            public GameObject ExplosionPrefab;
+            public AudioClip[] ExplosionSounds;
         }
 
         [Serializable]

@@ -1,5 +1,6 @@
 using Assets.Scripts.Runtime.ExplodingElves.Elves;
 using Assets.Scripts.Runtime.ExplodingElves.Installers;
+using Assets.Scripts.Runtime.ExplodingElves.Misc;
 using Assets.Scripts.Runtime.ExplodingElves.Spawners.Portals;
 using Zenject;
 
@@ -8,8 +9,9 @@ namespace Assets.Scripts.Runtime.ExplodingElves.Spawners
     public class BlueElvesSpawner : GenericElvesSpawner
     {
         public BlueElvesSpawner(BlueElfView.Factory elfFactory, SpawnPortalView.Factory bluePortalFactory, SignalBus signalBus,
-            MainSceneInstaller.ElfSettings elvesSettings, MainSceneInstaller.PortalSettings portalSettings)
-            : base(signalBus, elvesSettings)
+            MainSceneInstaller.ElfSettings elvesSettings, MainSceneInstaller.PortalSettings portalSettings,
+            MainSceneInstaller.ExplosionSettings explosionSettings, AudioPlayer audioPlayer)
+            : base(signalBus, elvesSettings, explosionSettings, audioPlayer)
         {
             _elfFactory = elfFactory;
             _portalFactory = bluePortalFactory;

@@ -7,11 +7,13 @@ namespace Assets.Scripts.Runtime.ExplodingElves.Installers
     public class AppSettingsInstaller : ScriptableObjectInstaller<AppSettingsInstaller>
     {
         [SerializeField] private MainSceneInstaller.ElfSettings[] ElvesSettings;
+        [SerializeField] private MainSceneInstaller.ExplosionSettings ExplosionSettings;
         [SerializeField] private MainSceneInstaller.PortalSettings[] PortalSettings;
         [SerializeField] private MainSceneInstaller.FloorSetting FloorSettings;
         public override void InstallBindings()
         {
             Container.BindInstance(ElvesSettings).WithId("elves").IfNotBound();
+            Container.BindInstance(ExplosionSettings).WithId("explosionSettings").IfNotBound();
             Container.BindInstance(FloorSettings).IfNotBound();
             Container.BindInstance(PortalSettings[0]).WithId("blackSpawnPortal").IfNotBound();
             Container.BindInstance(PortalSettings[1]).WithId("blueSpawnPortal").IfNotBound();

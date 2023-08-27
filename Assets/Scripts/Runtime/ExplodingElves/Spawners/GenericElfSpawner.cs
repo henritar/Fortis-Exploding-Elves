@@ -5,6 +5,7 @@ using Assets.Scripts.Runtime.ExplodingElves.Spawners.Portals;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using UniRx;
 using UnityEngine;
@@ -17,6 +18,8 @@ namespace Assets.Scripts.Runtime.ExplodingElves.Spawners
         protected static Mutex mut = new Mutex();
         protected readonly SignalBus _signalBus;
         protected readonly MainSceneInstaller.ElfSettings _elvesSettings;
+        protected readonly MainSceneInstaller.ExplosionSettings _explosionSettings;
+        protected readonly AudioPlayer _audioPlayer;
 
         protected IFactory<ElfView> _elfFactory;
         protected SpawnPortalView.Factory _portalFactory;
@@ -27,11 +30,13 @@ namespace Assets.Scripts.Runtime.ExplodingElves.Spawners
         protected IDisposable coroutine;
         protected float SpawnRate = 1;
         protected int SpawnMaxCount;
-        public GenericElvesSpawner(SignalBus signalBus, MainSceneInstaller.ElfSettings elvesSettings)
+        public GenericElvesSpawner(SignalBus signalBus, MainSceneInstaller.ElfSettings elvesSettings, MainSceneInstaller.ExplosionSettings explosionSettings, AudioPlayer audioPlayer)
         {
             _signalBus = signalBus;
             _elvesSettings = elvesSettings;
             SpawnMaxCount = elvesSettings.MaxSpawnQt;
+            _explosionSettings = explosionSettings;
+            _audioPlayer = audioPlayer;
         }
 
 
@@ -85,6 +90,7 @@ namespace Assets.Scripts.Runtime.ExplodingElves.Spawners
                     _elfPool.Remove(elfView);
                     elfView.Dispose();
                 }
+                _audioPlayer.Play(_explosionSettings.ExplosionSounds.First());
                 mut.ReleaseMutex();
                 
             }
