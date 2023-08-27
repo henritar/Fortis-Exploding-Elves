@@ -1,5 +1,5 @@
 using Assets.Scripts.Runtime.ExplodingElves.Elves;
-using Assets.Scripts.Runtime.ExplodingElves.Spawners;
+using Assets.Scripts.Runtime.ExplodingElves.Spawners.Portals;
 using System;
 using UnityEngine;
 using Zenject;
@@ -25,6 +25,8 @@ namespace Assets.Scripts.Runtime.ExplodingElves.Installers
                 .FromSubContainerResolve().ByNewPrefabInstaller<RedElfInstaller>(_elvesSettings[2].ElfPrefab).UnderTransformGroup("RedElfPool"));
             Container.BindFactory<WhiteElfView, WhiteElfView.Factory>().FromMonoPoolableMemoryPool(pool => pool.WithInitialSize(10).ExpandByDoubling()
                 .FromSubContainerResolve().ByNewPrefabInstaller<WhiteElfInstaller>(_elvesSettings[3].ElfPrefab).UnderTransformGroup("WhiteElfPool"));
+
+           
 
             Container.Bind<string>().FromInstance(_elvesSettings[0].ElfName)
                     .WhenInjectedInto<BlackElfModel>();
@@ -63,9 +65,10 @@ namespace Assets.Scripts.Runtime.ExplodingElves.Installers
         public class ElfSettings
         {
             public GameObject ElfPrefab;
+            
             public string ElfName;
             public Vector2Int StartLocation;
-            public float SpawnRate;
+            public int MaxSpawnQt;
         }
 
         [Serializable]
@@ -73,6 +76,12 @@ namespace Assets.Scripts.Runtime.ExplodingElves.Installers
         {
             public float FloorCenter;
             public float FloorExtends;
+        }
+
+        [Serializable]
+        public class PortalSettings
+        {
+            public GameObject ElfSpawnPortalPrefab;
         }
     }
 }

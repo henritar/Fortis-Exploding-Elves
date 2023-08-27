@@ -1,4 +1,5 @@
 using Assets.Scripts.Runtime.ExplodingElves.Elves;
+using Assets.Scripts.Runtime.ExplodingElves.Spawners.Portals;
 using UnityEngine;
 using UnityEngine.AI;
 using Zenject;
@@ -9,6 +10,7 @@ namespace Assets.Scripts.Runtime.ExplodingElves.Installers
     {
         [Inject]
         MainSceneInstaller.FloorSetting _floorSettings;
+        
         public override void InstallBindings()
         {
             Container.BindInterfacesAndSelfTo<BlackElfController>().AsSingle();
@@ -19,6 +21,7 @@ namespace Assets.Scripts.Runtime.ExplodingElves.Installers
             Container.Bind<Collider>().FromComponentOnRoot().AsSingle();
             Container.BindInstance(_floorSettings.FloorCenter).WithId("floorCenter").WhenInjectedInto<BlackElfModel>().IfNotBound();
             Container.BindInstance(_floorSettings.FloorExtends).WithId("floorExtends").WhenInjectedInto<BlackElfModel>().IfNotBound();
+
 
             //STATES
         }

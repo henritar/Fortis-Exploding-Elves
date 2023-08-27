@@ -1,6 +1,7 @@
 using Assets.Scripts.Runtime.ExplodingElves.Elves;
 using Assets.Scripts.Runtime.ExplodingElves.Installers;
 using Assets.Scripts.Runtime.ExplodingElves.Misc;
+using Assets.Scripts.Runtime.ExplodingElves.Spawners.Portals;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -18,6 +19,8 @@ namespace Assets.Scripts.Runtime.ExplodingElves.Spawners
         protected readonly MainSceneInstaller.ElfSettings _elvesSettings;
 
         protected IFactory<ElfView> _elfFactory;
+        protected SpawnPortalView.Factory _portalFactory;
+        protected MainSceneInstaller.PortalSettings _portalSettings;
 
         protected List<ElfView> _elfPool = new List<ElfView>();
         protected List<int> CollisionHashList = new List<int>();
@@ -38,6 +41,9 @@ namespace Assets.Scripts.Runtime.ExplodingElves.Spawners
             _signalBus.Subscribe<IUpdateElfSpawnRate>(UpdateElfSpawnRate);
             _signalBus.Subscribe<RestartGameSignal>(RestartElvesPool);
             coroutine = Observable.FromCoroutine(() => SpawnElvesCoroutine(SpawnRate)).Subscribe();
+
+            var portal = _portalFactory.Create(_portalSettings.ElfSpawnPortalPrefab);
+            portal.transform.position = new Vector3(_elvesSettings.StartLocation.x, portal.transform.position.y, _elvesSettings.StartLocation.y);
         }
 
        
@@ -52,6 +58,9 @@ namespace Assets.Scripts.Runtime.ExplodingElves.Spawners
 
         public ElfView SpawnElf()
         {
+            if (_elfPool.Count > _elvesSettings.MaxSpawnQt)
+                return null;
+
             var newElf = _elfFactory.Create();
             newElf.transform.position = new Vector3(_elvesSettings.StartLocation.x, newElf.transform.position.y, _elvesSettings.StartLocation.y);
             _elfPool.Add(newElf);
@@ -91,7 +100,8 @@ namespace Assets.Scripts.Runtime.ExplodingElves.Spawners
                 CollisionHashList.Add(signal.CollisionHash);
                 var newElf = SpawnElf();
                 
-                newElf.transform.position = signal.SpawnLocation;
+                if(newElf != null)
+                    newElf.transform.position = signal.SpawnLocation;
             }
             mut.ReleaseMutex();
         }
@@ -129,6 +139,5 @@ namespace Assets.Scripts.Runtime.ExplodingElves.Spawners
             }
             coroutine = Observable.FromCoroutine(() => SpawnElvesCoroutine(SpawnRate)).Subscribe();
         }
-
     }
 }

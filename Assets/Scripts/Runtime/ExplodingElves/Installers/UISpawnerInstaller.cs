@@ -1,5 +1,6 @@
 using Assets.Scripts.Runtime.ExplodingElves.Installers;
 using Assets.Scripts.Runtime.ExplodingElves.Spawners;
+using Assets.Scripts.Runtime.ExplodingElves.Spawners.Portals;
 using Assets.Scripts.Runtime.ExplodingElves.UI.Spawners;
 using TMPro;
 using UnityEngine;
@@ -10,6 +11,14 @@ public class UISpawnerInstaller : MonoInstaller
 {
     [Inject(Id = "elves")]
     MainSceneInstaller.ElfSettings[] _elvesSettings;
+    [Inject(Id = "blackSpawnPortal")]
+    MainSceneInstaller.PortalSettings _blackPortalSettings;
+    [Inject(Id = "blueSpawnPortal")]
+    MainSceneInstaller.PortalSettings _bluePortalSettings;
+    [Inject(Id = "redSpawnPortal")]
+    MainSceneInstaller.PortalSettings _redPortalSettings;
+    [Inject(Id = "whiteSpawnPortal")]
+    MainSceneInstaller.PortalSettings _whitePortalSettings;
 
     [SerializeField] public Canvas SpawnerCanvas;
 
@@ -41,13 +50,15 @@ public class UISpawnerInstaller : MonoInstaller
 
     public override void InstallBindings()
     {
-        Container.BindInterfacesAndSelfTo<BlackElvesSpawner>().AsSingle().WithArguments(_elvesSettings[0]);
-        Container.BindInterfacesAndSelfTo<BlueElvesSpawner>().AsSingle().WithArguments(_elvesSettings[1]);
-        Container.BindInterfacesAndSelfTo<RedElvesSpawner>().AsSingle().WithArguments(_elvesSettings[2]);
-        Container.BindInterfacesAndSelfTo<WhiteElvesSpawner>().AsSingle().WithArguments(_elvesSettings[3]);
+        Container.BindInterfacesAndSelfTo<BlackElvesSpawner>().AsSingle().WithArguments(_elvesSettings[0], _blackPortalSettings) ;
+        Container.BindInterfacesAndSelfTo<BlueElvesSpawner>().AsSingle().WithArguments(_elvesSettings[1], _bluePortalSettings);
+        Container.BindInterfacesAndSelfTo<RedElvesSpawner>().AsSingle().WithArguments(_elvesSettings[2], _redPortalSettings);
+        Container.BindInterfacesAndSelfTo<WhiteElvesSpawner>().AsSingle().WithArguments(_elvesSettings[3], _whitePortalSettings);
         Container.BindInterfacesAndSelfTo<SpawnerUIController>().AsSingle();
         Container.Bind<SpawnerUIModel>().AsSingle().WhenInjectedInto<SpawnerUIController>();
         Container.BindInterfacesAndSelfTo<SpawnerUIView>().FromComponentInHierarchy().AsSingle().WhenInjectedInto<SpawnerUIController>();
+
+        Container.BindFactory<UnityEngine.Object, SpawnPortalView, SpawnPortalView.Factory>().FromFactory<PrefabFactory<SpawnPortalView>>();
 
         Container.BindInstance(SpawnerCanvas).WithId("spawnerCanvas").WhenInjectedInto<SpawnerUIModel>();
 
@@ -76,5 +87,12 @@ public class UISpawnerInstaller : MonoInstaller
         Container.BindInstance(WhiteElfUpButton).WithId("whiteElfUpButton").WhenInjectedInto<SpawnerUIModel>();
 
         Container.BindInstance(CloseSpawnButton).WithId("closeSpawnButton").WhenInjectedInto<SpawnerUIModel>();
+
+
+        //Container.BindFactory<UnityEngine.Object, SpawnPortalView, SpawnPortalView.Factory>().WithId("blackFactory").FromFactory<PrefabFactory<SpawnPortalView>>().WhenInjectedInto<BlackElvesSpawner>();
+        //Container.BindFactory<UnityEngine.Object, SpawnPortalView, SpawnPortalView.Factory>().WithId("blueFactory").FromFactory<PrefabFactory<SpawnPortalView>>().WhenInjectedInto<BlueElvesSpawner>();
+        //Container.BindFactory<UnityEngine.Object, SpawnPortalView, SpawnPortalView.Factory>().WithId("redFactory").FromFactory<PrefabFactory<SpawnPortalView>>().WhenInjectedInto<RedElvesSpawner>();
+        //Container.BindFactory<UnityEngine.Object, SpawnPortalView, SpawnPortalView.Factory>().WithId("whiteFactory").FromFactory<PrefabFactory<SpawnPortalView>>().WhenInjectedInto<WhiteElvesSpawner>();
+
     }
 }

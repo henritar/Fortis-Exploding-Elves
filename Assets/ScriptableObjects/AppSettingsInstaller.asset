@@ -16,19 +16,24 @@ MonoBehaviour:
   - ElfPrefab: {fileID: 2622138823800758538, guid: fb1cf6f374fef1f43846d271393c6bf7, type: 3}
     ElfName: BlackElf
     StartLocation: {x: -15, y: 15}
-    SpawnRate: 2
+    MaxSpawnQt: 120
   - ElfPrefab: {fileID: 2622138823800758538, guid: 9f755729eee785f40888459ae641964a, type: 3}
     ElfName: BlueElf
     StartLocation: {x: 15, y: 15}
-    SpawnRate: 2
+    MaxSpawnQt: 120
   - ElfPrefab: {fileID: 2622138823800758538, guid: 87d5c11504875004d8adfdec626b0bad, type: 3}
     ElfName: RedElf
     StartLocation: {x: -15, y: -15}
-    SpawnRate: 2
+    MaxSpawnQt: 120
   - ElfPrefab: {fileID: 2622138823800758538, guid: a0f8e0878a4e8d7459f6e4ee61a7e3ee, type: 3}
     ElfName: WhiteElf
     StartLocation: {x: 15, y: -15}
-    SpawnRate: 2
+    MaxSpawnQt: 120
+  PortalSettings:
+  - ElfSpawnPortalPrefab: {fileID: 8545734307110137104, guid: bd549e8f401958e4e95f46d1bdec1bad, type: 3}
+  - ElfSpawnPortalPrefab: {fileID: 5544422193527058463, guid: 3107b0e11fcf98e46bb443ff78f734d8, type: 3}
+  - ElfSpawnPortalPrefab: {fileID: 9143354094151764724, guid: 6792dd0647cc8c8458a059f9a734f0ff, type: 3}
+  - ElfSpawnPortalPrefab: {fileID: 2644847634081744198, guid: 6ba3b2d43edead840bdf2414f3074c24, type: 3}
   FloorSettings:
     FloorCenter: 0
     FloorExtends: 22
