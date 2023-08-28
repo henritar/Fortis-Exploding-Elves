@@ -33,6 +33,7 @@ namespace Assets.Scripts.Runtime.ExplodingElves.UI.Spawners.Rate
 
             _signalBus.Subscribe<AdjustSpawnRateSignal>(ShowSpawnRateUI);
 
+
             //Black Elf Buttons Listener
             _model.BlackElfDownButton.onClick.AddListener(() =>
             {
@@ -129,6 +130,19 @@ namespace Assets.Scripts.Runtime.ExplodingElves.UI.Spawners.Rate
 
         public void Dispose()
         {
+            _model.BlackElfDownButton.onClick.RemoveAllListeners();
+            _model.BlackElfUpButton.onClick.RemoveAllListeners();
+
+            _model.BlueElfDownButton.onClick.RemoveAllListeners();
+            _model.BlueElfUpButton.onClick.RemoveAllListeners();
+
+            _model.RedElfDownButton.onClick.RemoveAllListeners();
+            _model.RedElfUpButton.onClick.RemoveAllListeners();
+
+            _model.WhiteElfDownButton.onClick.RemoveAllListeners();
+            _model.WhiteElfUpButton.onClick.RemoveAllListeners();
+
+            _model.CloseSpawnButton.onClick.RemoveAllListeners();
         }
 
         private void ShowSpawnRateUI(AdjustSpawnRateSignal signal)
