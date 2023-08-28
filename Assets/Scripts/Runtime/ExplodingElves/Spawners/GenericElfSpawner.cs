@@ -66,7 +66,7 @@ namespace Assets.Scripts.Runtime.ExplodingElves.Spawners
 
         public ElfView SpawnElf()
         {
-            if (_elfPool.Count > SpawnMaxCount)
+            if (_elfPool.Distinct().ToList().Count >= SpawnMaxCount)
                 return null;
 
             var newElf = _elfFactory.Create();
