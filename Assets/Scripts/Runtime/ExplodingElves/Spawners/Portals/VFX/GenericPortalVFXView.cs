@@ -25,6 +25,7 @@ namespace Assets.Scripts.Runtime.ExplodingElves.Spawners.Portals.VFX
 
         public void OnDespawned()
         {
+            _pool = null;
         }
 
         public void OnSpawned(IMemoryPool pool)
