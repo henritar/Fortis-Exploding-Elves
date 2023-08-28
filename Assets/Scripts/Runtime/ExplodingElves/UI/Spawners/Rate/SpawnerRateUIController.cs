@@ -37,7 +37,7 @@ namespace Assets.Scripts.Runtime.ExplodingElves.UI.Spawners.Rate
             _model.BlackElfDownButton.onClick.AddListener(() =>
             {
                 var newValue = Mathf.Max(MinSpawnRate, float.Parse(_model.BlackElfValueText.text) - SpawnDefinedRate);
-                _signalBus.AbstractFire(new UpdateBlackElfSignal()
+                _signalBus.AbstractFire<IUpdateElfSpawnRate>(new UpdateBlackElfSignal()
                 {
                     ElfName = "BlackElf",
                     SpawnRate = newValue
@@ -48,7 +48,7 @@ namespace Assets.Scripts.Runtime.ExplodingElves.UI.Spawners.Rate
             _model.BlackElfUpButton.onClick.AddListener(() =>
             {
                 var newValue = float.Parse(_model.BlackElfValueText.text) + SpawnDefinedRate;
-                _signalBus.AbstractFire(new UpdateBlackElfSignal()
+                _signalBus.AbstractFire<IUpdateElfSpawnRate>(new UpdateBlackElfSignal()
                 {
                     ElfName = "BlackElf",
                     SpawnRate = newValue
@@ -60,7 +60,7 @@ namespace Assets.Scripts.Runtime.ExplodingElves.UI.Spawners.Rate
             _model.BlueElfDownButton.onClick.AddListener(() =>
             {
                 var newValue = Mathf.Max(MinSpawnRate, float.Parse(_model.BlueElfValueText.text) - SpawnDefinedRate);
-                _signalBus.AbstractFire(new UpdateBlueElfSignal()
+                _signalBus.AbstractFire<IUpdateElfSpawnRate>(new UpdateBlueElfSignal()
                 {
                     ElfName = "BlueElf",
                     SpawnRate = newValue
@@ -71,7 +71,7 @@ namespace Assets.Scripts.Runtime.ExplodingElves.UI.Spawners.Rate
             _model.BlueElfUpButton.onClick.AddListener(() =>
             {
                 var newValue = float.Parse(_model.BlueElfValueText.text) + SpawnDefinedRate;
-                _signalBus.AbstractFire(new UpdateBlueElfSignal()
+                _signalBus.AbstractFire<IUpdateElfSpawnRate>(new UpdateBlueElfSignal()
                 {
                     ElfName = "BlueElf",
                     SpawnRate = newValue
@@ -83,7 +83,7 @@ namespace Assets.Scripts.Runtime.ExplodingElves.UI.Spawners.Rate
             _model.RedElfDownButton.onClick.AddListener(() =>
             {
                 var newValue = Mathf.Max(MinSpawnRate, float.Parse(_model.RedElfValueText.text) - SpawnDefinedRate);
-                _signalBus.AbstractFire(new UpdateRedElfSignal()
+                _signalBus.AbstractFire<IUpdateElfSpawnRate>(new UpdateRedElfSignal()
                 {
                     ElfName = "RedElf",
                     SpawnRate = newValue
@@ -94,7 +94,7 @@ namespace Assets.Scripts.Runtime.ExplodingElves.UI.Spawners.Rate
             _model.RedElfUpButton.onClick.AddListener(() =>
             {
                 var newValue = float.Parse(_model.RedElfValueText.text) + SpawnDefinedRate;
-                _signalBus.AbstractFire(new UpdateRedElfSignal()
+                _signalBus.AbstractFire<IUpdateElfSpawnRate>(new UpdateRedElfSignal()
                 {
                     ElfName = "RedElf",
                     SpawnRate = newValue
@@ -106,7 +106,7 @@ namespace Assets.Scripts.Runtime.ExplodingElves.UI.Spawners.Rate
             _model.WhiteElfDownButton.onClick.AddListener(() =>
             {
                 var newValue = Mathf.Max(MinSpawnRate, float.Parse(_model.WhiteElfValueText.text) - SpawnDefinedRate);
-                _signalBus.AbstractFire(new UpdateWhiteElfSignal()
+                _signalBus.AbstractFire<IUpdateElfSpawnRate>(new UpdateWhiteElfSignal()
                 {
                     ElfName = "WhiteElf",
                     SpawnRate = newValue
@@ -117,7 +117,7 @@ namespace Assets.Scripts.Runtime.ExplodingElves.UI.Spawners.Rate
             _model.WhiteElfUpButton.onClick.AddListener(() =>
             {
                 var newValue = float.Parse(_model.WhiteElfValueText.text) + SpawnDefinedRate;
-                _signalBus.AbstractFire(new UpdateWhiteElfSignal()
+                _signalBus.AbstractFire<IUpdateElfSpawnRate>(new UpdateWhiteElfSignal()
                 {
                     ElfName = "WhiteElf",
                     SpawnRate = newValue
