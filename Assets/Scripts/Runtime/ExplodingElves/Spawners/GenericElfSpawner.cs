@@ -76,9 +76,8 @@ namespace Assets.Scripts.Runtime.ExplodingElves.Spawners
                 return null;
 
             var newElf = _elfFactory.Create();
-            var portalVFX = _portalVFXFactory.Create();
             var startLocation = new Vector3(_elvesSettings.StartLocation.x, newElf.transform.position.y, _elvesSettings.StartLocation.y);
-            portalVFX.transform.position = startLocation;
+            SpawnPortalVFX(startLocation);
             newElf.transform.position = startLocation;
             _elfPool.Add(newElf);
             return newElf;
@@ -131,8 +130,9 @@ namespace Assets.Scripts.Runtime.ExplodingElves.Spawners
 
                 CollisionHashList.Add(signal.CollisionHash);
                 var newElf = SpawnElf();
-                
-                if(newElf != null)
+                SpawnPortalVFX(signal.SpawnLocation);
+                _audioPlayer.Play(_elvesSettings.ElfSpawnSound, 0.5f);
+                if (newElf != null)
                     newElf.transform.position = signal.SpawnLocation;
             }
             mut.ReleaseMutex();
@@ -180,6 +180,11 @@ namespace Assets.Scripts.Runtime.ExplodingElves.Spawners
                 }
             }
             coroutine = Observable.FromCoroutine(() => SpawnElvesCoroutine(SpawnRate)).Subscribe();
+        }
+        private void SpawnPortalVFX(Vector3 startPosition)
+        {
+            var portalVFX = _portalVFXFactory.Create();
+            portalVFX.transform.position = startPosition;
         }
     }
 }

@@ -11,7 +11,6 @@ namespace Assets.Scripts.Runtime.ExplodingElves.Spawners
 {
     public class BlackElvesSpawner : GenericElvesSpawner
     {
-
         public BlackElvesSpawner(BlackElfView.Factory elfFactory, BlackPortalVFXView.Factory portalVFXFactory, SpawnPortalView.Factory blackPortalFactory,
             MainSceneInstaller.PortalSettings portalSettings, SignalBus signalBus, MainSceneInstaller.ElfSettings elvesSettings,
             MainSceneInstaller.ExplosionSettings explosionSettings, AudioPlayer audioPlayer, ExplosionView.Factory explosionFactory)

@@ -25,6 +25,10 @@ namespace Assets.Scripts.Runtime.ExplodingElves.Spawners.Portals.VFX
 
         public void OnDespawned()
         {
+            if (_pool.NumActive < 2)
+            {
+                _pool.Resize(4);
+            }
             _pool = null;
         }
 

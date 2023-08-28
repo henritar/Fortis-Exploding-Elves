@@ -62,7 +62,7 @@ namespace Assets.Scripts.Runtime.ExplodingElves.Installers
         public class ElfSettings
         {
             public GameObject ElfPrefab;
-            
+            public AudioClip ElfSpawnSound;
             public string ElfName;
             public Vector2Int StartLocation;
             public int MaxSpawnQt;
