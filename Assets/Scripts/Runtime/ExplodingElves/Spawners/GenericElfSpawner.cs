@@ -26,7 +26,7 @@ namespace Assets.Scripts.Runtime.ExplodingElves.Spawners
         protected MainSceneInstaller.PortalSettings _portalSettings;
 
         protected List<ElfView> _elfPool = new List<ElfView>();
-        protected List<int> CollisionHashList = new List<int>();
+        protected static List<int> CollisionHashList = new List<int>();
         protected IDisposable coroutine;
         protected float SpawnRate = 1;
         protected int SpawnMaxCount;
@@ -81,18 +81,32 @@ namespace Assets.Scripts.Runtime.ExplodingElves.Spawners
                 ? signal.Collider
                 : null;
 
-            if (elfView != null && elfView.CompareTag(_elvesSettings.ElfName))
+            if (elfView != null)
             {
                 
                 mut.WaitOne();
+
+                bool hasKey = CollisionHashList.Contains(signal.CollisionHash);
+
+                if (hasKey)
+                {
+                    _audioPlayer.Play(_explosionSettings.ExplosionSounds.First());
+                    Debug.Log("True: " + signal.CollisionHash);
+                    CollisionHashList.Remove(signal.CollisionHash);
+                }
+                else
+                {
+                    Debug.Log("False: " + signal.CollisionHash);
+                    CollisionHashList.Add(signal.CollisionHash);
+                }
+
                 while (_elfPool.Contains(elfView))
                 {
                     _elfPool.Remove(elfView);
                     elfView.Dispose();
                 }
-                _audioPlayer.Play(_explosionSettings.ExplosionSounds.First());
+
                 mut.ReleaseMutex();
-                
             }
         }
 

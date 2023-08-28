@@ -36,12 +36,13 @@ namespace Assets.Scripts.Runtime.ExplodingElves.Elves
             _view.gameObject.OnCollisionEnterAsObservable()
                 .Subscribe(collision =>
                 {
+                    var CollisionHash = collision.gameObject.GetHashCode() + _view.gameObject.GetHashCode();
                     if (collision.gameObject.CompareTag(_view.gameObject.tag))
                     {
                         _model.ViewRigidbody.detectCollisions = false;
                         _signalBus.Fire(new GenerativeCollisionEnterSignal() 
                             { 
-                                CollisionHash = collision.gameObject.GetHashCode() + _view.gameObject.GetHashCode(), 
+                                CollisionHash = CollisionHash, 
                                 ColliderPrefabTag = _model.ElfName,
                                 SpawnLocation = _view.transform.position
                             });
@@ -50,8 +51,9 @@ namespace Assets.Scripts.Runtime.ExplodingElves.Elves
                     else
                     {
                         _signalBus.Fire(new DestructiveCollisionSignal() 
-                            { 
-                                Collider = _view.gameObject.GetComponent<ElfView>(),
+                            {
+                            CollisionHash = CollisionHash,
+                            Collider = _view.gameObject.GetComponent<ElfView>(),
                             });
                     }
                 });

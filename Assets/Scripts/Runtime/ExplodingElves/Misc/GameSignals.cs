@@ -9,12 +9,18 @@ namespace Assets.Scripts.Runtime.ExplodingElves.Misc
         public Vector2Int ElfStartLocation { get; set; }
     }
 
-    public struct DestructiveCollisionSignal
+    public interface ICollisionSignal
     {
+        public int CollisionHash { get; set; }
+    }
+
+    public struct DestructiveCollisionSignal : ICollisionSignal
+    {
+        public int CollisionHash { get; set; }
         public ElfView Collider { get; set; }
     }
 
-    public struct GenerativeCollisionEnterSignal
+    public struct GenerativeCollisionEnterSignal : ICollisionSignal
     {
         public int CollisionHash { get; set; }
         public string ColliderPrefabTag { get; set; }
