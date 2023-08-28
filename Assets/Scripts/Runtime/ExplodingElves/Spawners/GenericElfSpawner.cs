@@ -91,12 +91,10 @@ namespace Assets.Scripts.Runtime.ExplodingElves.Spawners
                 if (hasKey)
                 {
                     _audioPlayer.Play(_explosionSettings.ExplosionSounds.First());
-                    Debug.Log("True: " + signal.CollisionHash);
                     CollisionHashList.Remove(signal.CollisionHash);
                 }
                 else
                 {
-                    Debug.Log("False: " + signal.CollisionHash);
                     CollisionHashList.Add(signal.CollisionHash);
                 }
 
