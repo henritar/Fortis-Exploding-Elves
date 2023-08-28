@@ -1,6 +1,7 @@
 using Assets.Scripts.Runtime.ExplodingElves.Installers;
 using Assets.Scripts.Runtime.ExplodingElves.Spawners;
 using Assets.Scripts.Runtime.ExplodingElves.Spawners.Portals;
+using Assets.Scripts.Runtime.ExplodingElves.Spawners.Portals.VFX;
 using Assets.Scripts.Runtime.ExplodingElves.UI.Spawners.Rate;
 using TMPro;
 using UnityEngine;
@@ -87,5 +88,29 @@ public class UISpawnerRateInstaller : MonoInstaller
         Container.BindInstance(WhiteElfUpButton).WithId("whiteElfUpButton").WhenInjectedInto<SpawnerRateUIModel>();
 
         Container.BindInstance(CloseSpawnButton).WithId("closeSpawnButton").WhenInjectedInto<SpawnerRateUIModel>();
+
+        Container.BindFactory<BlackPortalVFXView, BlackPortalVFXView.Factory>()
+                .FromPoolableMemoryPool<BlackPortalVFXView, BlackPortalVFXView.PortalVFXPool>(poolBinder => poolBinder
+                    .WithInitialSize(4).ExpandByDoubling()
+                    .FromComponentInNewPrefab(_blackPortalSettings.PortalVFXPrefab)
+                    .UnderTransformGroup("BlackPortalVFX"));
+
+        Container.BindFactory<BluePortalVFXView, BluePortalVFXView.Factory>()
+            .FromPoolableMemoryPool<BluePortalVFXView, BluePortalVFXView.PortalVFXPool>(poolBinder => poolBinder
+                .WithInitialSize(4).ExpandByDoubling()
+                .FromComponentInNewPrefab(_bluePortalSettings.PortalVFXPrefab)
+                .UnderTransformGroup("BluePortalVFX"));
+
+        Container.BindFactory<RedPortalVFXView, RedPortalVFXView.Factory>()
+            .FromPoolableMemoryPool<RedPortalVFXView, RedPortalVFXView.PortalVFXPool>(poolBinder => poolBinder
+                .WithInitialSize(4).ExpandByDoubling()
+                .FromComponentInNewPrefab(_redPortalSettings.PortalVFXPrefab)
+                .UnderTransformGroup("RedPortalVFX"));
+
+        Container.BindFactory<WhitePortalVFXView, WhitePortalVFXView.Factory>()
+            .FromPoolableMemoryPool<WhitePortalVFXView, WhitePortalVFXView.PortalVFXPool>(poolBinder => poolBinder
+                .WithInitialSize(4).ExpandByDoubling()
+                .FromComponentInNewPrefab(_whitePortalSettings.PortalVFXPrefab)
+                .UnderTransformGroup("WhitePortalVFX"));
     }
 }

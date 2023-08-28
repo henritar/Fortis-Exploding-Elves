@@ -35,9 +35,13 @@ MonoBehaviour:
     - {fileID: 8300000, guid: de758a0a6d90d0745ad0a463c9a9e9ac, type: 3}
   PortalSettings:
   - ElfSpawnPortalPrefab: {fileID: 8545734307110137104, guid: bd549e8f401958e4e95f46d1bdec1bad, type: 3}
+    PortalVFXPrefab: {fileID: 7196911527356348180, guid: 6367ae62bab06144fad0ae5a6ee26cf5, type: 3}
   - ElfSpawnPortalPrefab: {fileID: 5544422193527058463, guid: 3107b0e11fcf98e46bb443ff78f734d8, type: 3}
+    PortalVFXPrefab: {fileID: 5847608202483279443, guid: b8b2baf1f265f274b856c17ff47f86a3, type: 3}
   - ElfSpawnPortalPrefab: {fileID: 9143354094151764724, guid: 6792dd0647cc8c8458a059f9a734f0ff, type: 3}
+    PortalVFXPrefab: {fileID: 6624862174792804219, guid: d86c590c2cb57aa4aaab73103a281989, type: 3}
   - ElfSpawnPortalPrefab: {fileID: 2644847634081744198, guid: 6ba3b2d43edead840bdf2414f3074c24, type: 3}
+    PortalVFXPrefab: {fileID: 3180827601766332302, guid: 9120d91eb0a1678489727ac210b37b28, type: 3}
   FloorSettings:
     FloorCenter: 0
     FloorExtends: 22

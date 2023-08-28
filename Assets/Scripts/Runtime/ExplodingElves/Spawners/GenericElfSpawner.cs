@@ -3,6 +3,7 @@ using Assets.Scripts.Runtime.ExplodingElves.Explosion;
 using Assets.Scripts.Runtime.ExplodingElves.Installers;
 using Assets.Scripts.Runtime.ExplodingElves.Misc;
 using Assets.Scripts.Runtime.ExplodingElves.Spawners.Portals;
+using Assets.Scripts.Runtime.ExplodingElves.Spawners.Portals.VFX;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -23,6 +24,7 @@ namespace Assets.Scripts.Runtime.ExplodingElves.Spawners
         protected readonly AudioPlayer _audioPlayer;
 
         protected IFactory<ElfView> _elfFactory;
+        protected IFactory<GenericPortalVFXView> _portalVFXFactory;
         protected SpawnPortalView.Factory _portalFactory;
         protected MainSceneInstaller.PortalSettings _portalSettings;
         protected ExplosionView.Factory _explosionFactory;
@@ -74,7 +76,10 @@ namespace Assets.Scripts.Runtime.ExplodingElves.Spawners
                 return null;
 
             var newElf = _elfFactory.Create();
-            newElf.transform.position = new Vector3(_elvesSettings.StartLocation.x, newElf.transform.position.y, _elvesSettings.StartLocation.y);
+            var portalVFX = _portalVFXFactory.Create();
+            var startLocation = new Vector3(_elvesSettings.StartLocation.x, newElf.transform.position.y, _elvesSettings.StartLocation.y);
+            portalVFX.transform.position = startLocation;
+            newElf.transform.position = startLocation;
             _elfPool.Add(newElf);
             return newElf;
         }

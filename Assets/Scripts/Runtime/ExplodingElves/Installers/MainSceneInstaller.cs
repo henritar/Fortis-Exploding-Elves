@@ -1,10 +1,10 @@
 using Assets.Scripts.Runtime.ExplodingElves.Elves;
 using Assets.Scripts.Runtime.ExplodingElves.Explosion;
 using Assets.Scripts.Runtime.ExplodingElves.Misc;
+using Assets.Scripts.Runtime.ExplodingElves.Spawners;
 using System;
 using UnityEngine;
 using Zenject;
-using static Assets.Scripts.Runtime.ExplodingElves.Explosion.ExplosionView;
 
 namespace Assets.Scripts.Runtime.ExplodingElves.Installers
 {
@@ -15,7 +15,7 @@ namespace Assets.Scripts.Runtime.ExplodingElves.Installers
         MainSceneInstaller.ElfSettings[] _elvesSettings;
         [Inject(Id = "explosionSettings")]
         MainSceneInstaller.ExplosionSettings explosionSettings;
-        
+
 
         int elvesIndex;
         public override void InstallBindings()
@@ -34,7 +34,7 @@ namespace Assets.Scripts.Runtime.ExplodingElves.Installers
                 .FromSubContainerResolve().ByNewPrefabInstaller<WhiteElfInstaller>(_elvesSettings[3].ElfPrefab).UnderTransformGroup("WhiteElfPool"));
 
             Container.BindFactory<ExplosionView, ExplosionView.Factory>()
-                .FromPoolableMemoryPool<ExplosionView, ExplosionPool>(poolBinder => poolBinder
+                .FromPoolableMemoryPool<ExplosionView, ExplosionView.ExplosionPool>(poolBinder => poolBinder
                     .WithInitialSize(10).ExpandByDoubling()
                     .FromComponentInNewPrefab(explosionSettings.ExplosionPrefab)
                     .UnderTransformGroup("Explosions"));
@@ -85,6 +85,7 @@ namespace Assets.Scripts.Runtime.ExplodingElves.Installers
         public class PortalSettings
         {
             public GameObject ElfSpawnPortalPrefab;
+            public GameObject PortalVFXPrefab;
         }
     }
 }
