@@ -1,8 +1,10 @@
 using Assets.Scripts.Runtime.ExplodingElves.Elves;
+using Assets.Scripts.Runtime.ExplodingElves.Explosion;
 using Assets.Scripts.Runtime.ExplodingElves.Misc;
 using System;
 using UnityEngine;
 using Zenject;
+using static Assets.Scripts.Runtime.ExplodingElves.Explosion.ExplosionView;
 
 namespace Assets.Scripts.Runtime.ExplodingElves.Installers
 {
@@ -30,6 +32,12 @@ namespace Assets.Scripts.Runtime.ExplodingElves.Installers
                 .FromSubContainerResolve().ByNewPrefabInstaller<RedElfInstaller>(_elvesSettings[2].ElfPrefab).UnderTransformGroup("RedElfPool"));
             Container.BindFactory<WhiteElfView, WhiteElfView.Factory>().FromPoolableMemoryPool<WhiteElfView, WhiteElfView.WhiteElfPool>(pool => pool.WithInitialSize(10).ExpandByDoubling()
                 .FromSubContainerResolve().ByNewPrefabInstaller<WhiteElfInstaller>(_elvesSettings[3].ElfPrefab).UnderTransformGroup("WhiteElfPool"));
+
+            Container.BindFactory<ExplosionView, ExplosionView.Factory>()
+                .FromPoolableMemoryPool<ExplosionView, ExplosionPool>(poolBinder => poolBinder
+                    .WithInitialSize(10).ExpandByDoubling()
+                    .FromComponentInNewPrefab(explosionSettings.ExplosionPrefab)
+                    .UnderTransformGroup("Explosions"));
 
             Container.Bind<string>().FromInstance(_elvesSettings[0].ElfName)
                     .WhenInjectedInto<BlackElfModel>();

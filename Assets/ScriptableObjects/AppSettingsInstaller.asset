@@ -30,7 +30,7 @@ MonoBehaviour:
     StartLocation: {x: 15, y: -15}
     MaxSpawnQt: 120
   ExplosionSettings:
-    ExplosionPrefab: {fileID: 0}
+    ExplosionPrefab: {fileID: 100002, guid: 57f6c48e2c68ae14896ba0ce7aebcf02, type: 3}
     ExplosionSounds:
     - {fileID: 8300000, guid: de758a0a6d90d0745ad0a463c9a9e9ac, type: 3}
   PortalSettings:

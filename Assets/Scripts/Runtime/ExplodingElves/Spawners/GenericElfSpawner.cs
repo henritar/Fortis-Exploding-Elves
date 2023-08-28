@@ -1,4 +1,5 @@
 using Assets.Scripts.Runtime.ExplodingElves.Elves;
+using Assets.Scripts.Runtime.ExplodingElves.Explosion;
 using Assets.Scripts.Runtime.ExplodingElves.Installers;
 using Assets.Scripts.Runtime.ExplodingElves.Misc;
 using Assets.Scripts.Runtime.ExplodingElves.Spawners.Portals;
@@ -24,19 +25,22 @@ namespace Assets.Scripts.Runtime.ExplodingElves.Spawners
         protected IFactory<ElfView> _elfFactory;
         protected SpawnPortalView.Factory _portalFactory;
         protected MainSceneInstaller.PortalSettings _portalSettings;
+        protected ExplosionView.Factory _explosionFactory;
 
         protected List<ElfView> _elfPool = new List<ElfView>();
         protected static List<int> CollisionHashList = new List<int>();
         protected IDisposable coroutine;
         protected float SpawnRate = 1;
         protected int SpawnMaxCount;
-        public GenericElvesSpawner(SignalBus signalBus, MainSceneInstaller.ElfSettings elvesSettings, MainSceneInstaller.ExplosionSettings explosionSettings, AudioPlayer audioPlayer)
+        public GenericElvesSpawner(SignalBus signalBus, MainSceneInstaller.ElfSettings elvesSettings, MainSceneInstaller.ExplosionSettings explosionSettings,
+            AudioPlayer audioPlayer, ExplosionView.Factory explosionFactory)
         {
             _signalBus = signalBus;
             _elvesSettings = elvesSettings;
             SpawnMaxCount = elvesSettings.MaxSpawnQt;
             _explosionSettings = explosionSettings;
             _audioPlayer = audioPlayer;
+            _explosionFactory = explosionFactory;
         }
 
 
@@ -91,6 +95,8 @@ namespace Assets.Scripts.Runtime.ExplodingElves.Spawners
                 if (hasKey)
                 {
                     _audioPlayer.Play(_explosionSettings.ExplosionSounds.First());
+                    var explosion = _explosionFactory.Create();
+                    explosion.transform.position = new Vector3(elfView.transform.position.x, 2, elfView.transform.position.z);
                     CollisionHashList.Remove(signal.CollisionHash);
                 }
                 else

@@ -1,4 +1,5 @@
 using Assets.Scripts.Runtime.ExplodingElves.Elves;
+using Assets.Scripts.Runtime.ExplodingElves.Explosion;
 using Assets.Scripts.Runtime.ExplodingElves.Installers;
 using Assets.Scripts.Runtime.ExplodingElves.Misc;
 using Assets.Scripts.Runtime.ExplodingElves.Spawners.Portals;
@@ -10,8 +11,8 @@ namespace Assets.Scripts.Runtime.ExplodingElves.Spawners
     {
         public BlackElvesSpawner(BlackElfView.Factory elfFactory, SpawnPortalView.Factory blackPortalFactory,
             MainSceneInstaller.PortalSettings portalSettings, SignalBus signalBus, MainSceneInstaller.ElfSettings elvesSettings,
-            MainSceneInstaller.ExplosionSettings explosionSettings, AudioPlayer audioPlayer)
-            : base(signalBus, elvesSettings, explosionSettings, audioPlayer)
+            MainSceneInstaller.ExplosionSettings explosionSettings, AudioPlayer audioPlayer, ExplosionView.Factory explosionFactory)
+            : base(signalBus, elvesSettings, explosionSettings, audioPlayer, explosionFactory)
         {
             _elfFactory = elfFactory;
             _portalFactory = blackPortalFactory;
